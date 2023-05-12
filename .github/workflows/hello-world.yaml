@@ -20,7 +20,6 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Create env file
         run: |
-          cd ${{ github.workspace }}
           if [ -f ".env" ] ; then
             rm ".env"
           fi
@@ -37,7 +36,7 @@ jobs:
           cat .env
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls -a ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
   # create-env:
