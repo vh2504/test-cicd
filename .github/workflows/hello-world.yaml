@@ -9,19 +9,21 @@ jobs:
       - run: echo Hello World
 
   create-env:
-    - name: Create env file
-      run: |
-        if [ -f ".env" ] ; then
-          rm ".env"
-        fi
-        touch .env
-        echo APP_ENV="dev" >> .env
-        echo TOKEN_META_API="eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJlMjFjNmM1NTM1YTI3MDQwZWNjMTk3NGFmMjk1ODNlOCIsInBlcm1pc3Npb25zIjpbXSwidG9rZW5JZCI6IjIwMjEwMjEzIiwiaW1wZXJzb25hdGVkIjpmYWxzZSwicmVhbFVzZXJJZCI6ImUyMWM2YzU1MzVhMjcwNDBlY2MxOTc0YWYyOTU4M2U4IiwiaWF0IjoxNjc4MDY5NzMyfQ.lyzoHkN1zywJetJx3RDOBanZJP4lxYqrQUQE0u9RVGg1aq1NAPcPlhFIl2zgg1MDMCmR-wRwoyhrJ0iZE9-a6LDyFk1aOsTnrkJLIvKvz8UrY7ZFcP5RqEQx3KCpVqb5Qmycq5k2eCtQV4A2hELcG5K4jEsmU8p4vDtq20zV8m28q6Wlm40LhDfcfHyULQj_Sz1-4U0m2koBBHacPPL1FYiHnumFxCreLdR5JvpwZIQn9tm2sIAbYNX1RlxpsQwHxav3c0ppzP4_WXxjGqKEJ0tbBcs44A9qt2AbTREwm4XUGYeuGGqxrhx4RA9ovyj0xCkGV2nQ0rIvQkszPt4TIHvfSyZ86sdcvk6ozd6IY3gCCIGiWsMwYO6Bun44Mso-WEyBJdI0K6ewczOmlItf21F7nvzteoNJ-b6sGgkDqxBn1OKFQlfpKicZAmWx8S3VVm3wInUEyHXJCYzuZCKoBCzGbVH_M_qV07WCUSQdTpIkoyTs8ePpIIWfHnVy03_UkqvKojjBVDUBcatsju8OsoV0GY5-_YBRiBGDi1jKRkaGZ0CA1lrsVsJCPiBl0RYiu6QV7xwCWNM-VE4FSXt3I7e7sKz2aWBKPVVK283qWsz37NyrQx1Mi5ROj-2ayG2TRV8Bv41p6ttMagfvbrT5IpmaWVEmRSSv4JDxhhHrl_s" >> .env
-        echo TWILIO_AUTH_TOKEN="e1227dcd4df3d82b2db3f082684cfba7" >> .env
-        echo EMAIL_USER="dycjh@example.com" >> .env
-        echo EMAIL_PASS="gxtkaclhjnqcalpb" >> .env
-        echo FCM_SERVER_KEY="AAAA-t7mstw:APA91bGB6F77zYf5QeqlPEMCWh3gkNF2Y_BaH4vPR5IwGHHdu-qoWqWvnf4v-C9zbGHVnq2COu4FdYsoV3Eq2PENeN_pC02IfHtAe-E5ry5q6ttJRvw5i1pWmwwjDs8zvTZVO8TwK483" >> .env
-        echo STRIPE_PUBLISHABLE_KEY="pk_test_el8tTnkt8FUHkpAxqjcdFztJ00PpCgX7QL" >> .env
-        echo STRIPE_SECRET_KEY="sk_test_nzqOrqXD72UMnbQtV0wiQwMF000c2hMzVP" >> .env
-        echo STRIPE_WEBHOOK_SECRET_KEY="" >> .env
-        cat .env
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create env file
+        run: |
+          if [ -f ".env" ] ; then
+            rm ".env"
+          fi
+          touch .env
+          echo APP_ENV="dev" >> .env
+          echo TOKEN_META_API="eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJlMjFjNmM1NTM1YTI3MDQwZWNjMTk3NGFmMjk1ODNlOCIsInBlcm1pc3Npb25zIjpbXSwidG9rZW5JZCI6IjIwMjEwMjEzIiwiaW1wZXJzb25hdGVkIjpmYWxzZSwicmVhbFVzZXJJZCI6ImUyMWM2YzU1MzVhMjcwNDBlY2MxOTc0YWYyOTU4M2U4IiwiaWF0IjoxNjc4MDY5NzMyfQ.lyzoHkN1zywJetJx3RDOBanZJP4lxYqrQUQE0u9RVGg1aq1NAPcPlhFIl2zgg1MDMCmR-wRwoyhrJ0iZE9-a6LDyFk1aOsTnrkJLIvKvz8UrY7ZFcP5RqEQx3KCpVqb5Qmycq5k2eCtQV4A2hELcG5K4jEsmU8p4vDtq20zV8m28q6Wlm40LhDfcfHyULQj_Sz1-4U0m2koBBHacPPL1FYiHnumFxCreLdR5JvpwZIQn9tm2sIAbYNX1RlxpsQwHxav3c0ppzP4_WXxjGqKEJ0tbBcs44A9qt2AbTREwm4XUGYeuGGqxrhx4RA9ovyj0xCkGV2nQ0rIvQkszPt4TIHvfSyZ86sdcvk6ozd6IY3gCCIGiWsMwYO6Bun44Mso-WEyBJdI0K6ewczOmlItf21F7nvzteoNJ-b6sGgkDqxBn1OKFQlfpKicZAmWx8S3VVm3wInUEyHXJCYzuZCKoBCzGbVH_M_qV07WCUSQdTpIkoyTs8ePpIIWfHnVy03_UkqvKojjBVDUBcatsju8OsoV0GY5-_YBRiBGDi1jKRkaGZ0CA1lrsVsJCPiBl0RYiu6QV7xwCWNM-VE4FSXt3I7e7sKz2aWBKPVVK283qWsz37NyrQx1Mi5ROj-2ayG2TRV8Bv41p6ttMagfvbrT5IpmaWVEmRSSv4JDxhhHrl_s" >> .env
+          echo TWILIO_AUTH_TOKEN="e1227dcd4df3d82b2db3f082684cfba7" >> .env
+          echo EMAIL_USER="dycjh@example.com" >> .env
+          echo EMAIL_PASS="gxtkaclhjnqcalpb" >> .env
+          echo FCM_SERVER_KEY="AAAA-t7mstw:APA91bGB6F77zYf5QeqlPEMCWh3gkNF2Y_BaH4vPR5IwGHHdu-qoWqWvnf4v-C9zbGHVnq2COu4FdYsoV3Eq2PENeN_pC02IfHtAe-E5ry5q6ttJRvw5i1pWmwwjDs8zvTZVO8TwK483" >> .env
+          echo STRIPE_PUBLISHABLE_KEY="pk_test_el8tTnkt8FUHkpAxqjcdFztJ00PpCgX7QL" >> .env
+          echo STRIPE_SECRET_KEY="sk_test_nzqOrqXD72UMnbQtV0wiQwMF000c2hMzVP" >> .env
+          echo STRIPE_WEBHOOK_SECRET_KEY="" >> .env
+          cat .env
