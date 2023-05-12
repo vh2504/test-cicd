@@ -11,6 +11,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code first time
+        uses: actions/checkout@v2
       - name: Create env file
         run: |
           if [ -f ".env" ] ; then
@@ -28,6 +30,7 @@ jobs:
           echo STRIPE_WEBHOOK_SECRET_KEY="" >> .env
           cat .env
           echo ${{ github.workspace }}
+          ls -a
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
