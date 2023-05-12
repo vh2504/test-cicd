@@ -8,6 +8,7 @@ jobs:
     steps:
       - run: echo Hello World
 
+  create-env:
     - name: Create env file
       run: |
         if [ -f ".env" ] ; then
