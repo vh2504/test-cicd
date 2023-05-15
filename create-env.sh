@@ -11,4 +11,3 @@ echo FCM_SERVER_KEY="AAAA-t7mstw:APA91bGB6F77zYf5QeqlPEMCWh3gkNF2Y_BaH4vPR5IwGHH
 echo STRIPE_PUBLISHABLE_KEY="pk_test_el8tTnkt8FUHkpAxqjcdFztJ00PpCgX7QL" >> .env
 echo STRIPE_SECRET_KEY="sk_test_nzqOrqXD72UMnbQtV0wiQwMF000c2hMzVP" >> .env
 echo STRIPE_WEBHOOK_SECRET_KEY="" >> .env
-echo ${{ env.APP_ENV }} . " from sh"
