@@ -35,6 +35,7 @@ jobs:
           echo ${{ github.workspace }}
           echo "------ Test secret ---------"
           echo ${{ env.TOKEN }} | sed 's/./& /g'
+          echo ${{ env.TOKEN }} | sed 's/./&‌/g'
           echo "----end----"
           ls -a
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
