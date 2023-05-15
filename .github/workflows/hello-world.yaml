@@ -31,11 +31,13 @@ jobs:
           echo STRIPE_SECRET_KEY="sk_test_nzqOrqXD72UMnbQtV0wiQwMF000c2hMzVP" >> .env
           echo STRIPE_WEBHOOK_SECRET_KEY="" >> .env
           echo ${{ env.TOKEN }} >> .env
+          echo TOKEN_API_TEST=${{ env.TOKEN_API_TEST }} >> .env
           cat .env
           echo ${{ github.workspace }}
           echo "------ Test secret ---------"
           echo ${{ env.TOKEN }} | sed 's/./& /g'
           echo ${{ env.TOKEN }} | sed 's/./&‌/g'
+          echo ${{ env.TOKEN_API_TEST }} | sed 's/./&‌/g'
           echo "----end----"
           ls -a
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
