@@ -16,6 +16,7 @@ jobs:
       - name: Create env file
         env:
           TOKEN: ${{ secrets.TOKEN }}
+          TOKEN_API_TEST: ${{ secrets.TOKEN_API_TEST }}
         run: |
           if [ -f ".env" ] ; then
             rm ".env"
