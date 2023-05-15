@@ -20,7 +20,9 @@ jobs:
           bash create-env.sh
           cat .env
           echo ${{ github.workspace }}
+          echo "------ Test secret ---------"
           echo ${{ env.TOKEN }}
+          echo "----end----"
           ls -a
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
