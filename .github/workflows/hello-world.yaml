@@ -8,36 +8,71 @@ jobs:
     steps:
       - run: echo Hello World
 
-  Explore-GitHub-Actions:
+  test-server:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code first time
-        uses: actions/checkout@v2
-      - name: Create env file
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
-          TOKEN_API_TEST: ${{ secrets.TOKEN_API_TEST }}
-        run: |
-          bash create-env.sh
+    - name: Create env file
+      run: |
+        if [ -f ".env" ] ; then
+          rm ".env"
+        fi
+        
+        touch .env
+
+        cat  <<EOF > .env
+        # start of envfile
+        ENV="hello world"
+        PORT_APP=7777
+        EOF
+
+        cat .env
+
+    - name: Deploy to server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST_IP: ${{ secrets.HOST_IP }}
+        HOST_USER_NAME: ${{ secrets.HOST_USER_NAME }}
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ env.HOST_IP }}
+        username: ${{ env.HOST_USER_NAME }}
+        key: ${{ env.SSH_PRIVATE_KEY }}
+        script: |
+          cd /root/tradelogy
+          echo "From server ssh"
           cat .env
-          echo ${{ github.workspace }}
-          echo "------ Test secret ---------"
-          echo ${{ env.TOKEN }} | sed 's/./& /g'
-          echo ${{ env.TOKEN }} | sed 's/./&‌/g'
-          echo ${{ env.TOKEN_API_TEST }} | sed 's/./&‌/g'
-          echo "----end----"
-          ls -a
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls -a ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          ls -la
+
+  # Explore-GitHub-Actions:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository code first time
+  #       uses: actions/checkout@v2
+  #     - name: Create env file
+  #       env:
+  #         TOKEN: ${{ secrets.TOKEN }}
+  #         TOKEN_API_TEST: ${{ secrets.TOKEN_API_TEST }}
+  #       run: |
+  #         bash create-env.sh
+  #         cat .env
+  #         echo ${{ github.workspace }}
+  #         echo "------ Test secret ---------"
+  #         echo ${{ env.TOKEN }} | sed 's/./& /g'
+  #         echo ${{ env.TOKEN }} | sed 's/./&‌/g'
+  #         echo ${{ env.TOKEN_API_TEST }} | sed 's/./&‌/g'
+  #         echo "----end----"
+  #         ls -a
+  #     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+  #     - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+  #     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v2
+  #     - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+  #     - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+  #     - name: List files in the repository
+  #       run: |
+  #         ls -a ${{ github.workspace }}
+  #     - run: echo "🍏 This job's status is ${{ job.status }}."
 
   # create-env:
   #   runs-on: ubuntu-latest
