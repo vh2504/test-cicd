@@ -14,10 +14,13 @@ jobs:
       - name: Check out repository code first time
         uses: actions/checkout@v2
       - name: Create env file
+        env:
+          APP_ENV: ${{ secrets.APP_ENV }}
         run: |
           bash create-env.sh
           cat .env
           echo ${{ github.workspace }}
+          echo ${{ env.APP_ENV }}
           ls -a
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
